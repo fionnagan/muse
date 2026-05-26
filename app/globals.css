@@ -1,26 +1,116 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@theme {
+  /* Muse Color Palette — Wes Anderson × Alice in Wonderland */
+  --color-cream: #F8F4ED;
+  --color-cream-dark: #EEE8DA;
+  --color-rose: #D4958A;
+  --color-rose-light: #EDCDC7;
+  --color-rose-dark: #B5726A;
+  --color-sage: #8FA888;
+  --color-sage-light: #C3D4BF;
+  --color-sage-dark: #6A8866;
+  --color-blue: #8AAEC2;
+  --color-blue-light: #C4D9E5;
+  --color-blue-dark: #5C8BA8;
+  --color-gold: #C4955A;
+  --color-gold-light: #E2C89A;
+  --color-gold-dark: #9E7440;
+  --color-lilac: #A898C0;
+  --color-lilac-light: #D0C8DF;
+  --color-lilac-dark: #7B6A9C;
+  --color-sand: #D9CCBA;
+  --color-sand-dark: #C2B49E;
+  --color-ink: #1E1409;
+  --color-ink-light: #3D2B1A;
+  --color-paper: #FDFAF5;
+  --color-amber: #D4A853;
+  --color-coral: #CC7B6E;
+  --color-teal: #6BA3A3;
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
+  /* Typography */
+  --font-display: var(--font-playfair);
+  --font-sans: var(--font-space-grotesk);
   --font-mono: var(--font-geist-mono);
+
+  /* Spacing & Radii */
+  --radius-card: 12px;
+  --radius-badge: 20px;
+  --radius-lg: 16px;
+
+  /* Shadows */
+  --shadow-card: 0 2px 12px rgba(30, 20, 9, 0.08), 0 1px 3px rgba(30, 20, 9, 0.04);
+  --shadow-card-hover: 0 8px 32px rgba(30, 20, 9, 0.12), 0 2px 8px rgba(30, 20, 9, 0.06);
+  --shadow-float: 0 16px 48px rgba(30, 20, 9, 0.15);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* Base */
+* { box-sizing: border-box; }
+
+html {
+  background-color: var(--color-cream);
+  color: var(--color-ink);
+  -webkit-font-smoothing: antialiased;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-cream);
+  color: var(--color-ink);
+  font-family: var(--font-space-grotesk), system-ui, sans-serif;
+  min-height: 100vh;
 }
+
+/* Ornate divider */
+.ornate-divider {
+  position: relative;
+  text-align: center;
+  color: var(--color-sand-dark);
+  letter-spacing: 0.3em;
+  font-size: 0.65rem;
+}
+.ornate-divider::before,
+.ornate-divider::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 40%;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--color-sand-dark));
+}
+.ornate-divider::before { right: 55%; background: linear-gradient(to left, transparent, var(--color-sand-dark)); }
+.ornate-divider::after { left: 55%; }
+
+/* Corner frame decoration */
+.frame-corner {
+  position: relative;
+}
+.frame-corner::before,
+.frame-corner::after {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-color: var(--color-gold);
+  border-style: solid;
+}
+.frame-corner::before {
+  top: 8px; left: 8px;
+  border-width: 1px 0 0 1px;
+}
+.frame-corner::after {
+  bottom: 8px; right: 8px;
+  border-width: 0 1px 1px 0;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: var(--color-cream-dark); }
+::-webkit-scrollbar-thumb { background: var(--color-sand-dark); border-radius: 3px; }
+
+/* Selection */
+::selection { background: var(--color-rose-light); color: var(--color-ink); }
+
+/* Smooth transitions */
+* { transition-property: color, background-color, border-color, opacity, box-shadow, transform;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms; }
